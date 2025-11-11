@@ -1,4 +1,4 @@
-'''
+"""
 Example for creating classic study site climatology stack plots (temperature,
 precipitation d2H, precipitation amount) seen in many presentations and
 publications in the UB Paleoclimate Dynamics research group.
@@ -6,7 +6,7 @@ publications in the UB Paleoclimate Dynamics research group.
 Python code for producing this figure with a single study site.
 
 Author: Kurt R. Lindberg
-'''
+"""
 
 
 import pandas as pd
@@ -23,7 +23,7 @@ plt.rcParams['font.family'] = "Liberation Sans"     # changes all figure text
 ## Reformat Climate Reanalyzer ERA5 .csv files for climatology plots
 # there's definitely a better way to do this... but oh well
 def climplot_format(df, data_type, site_name, start_year, end_year):
-    '''
+    """
     Function arguments:
         df: input pandas DataFrame
         data_type: string name of the data type being formatted
@@ -34,7 +34,7 @@ def climplot_format(df, data_type, site_name, start_year, end_year):
     Returns:
         df_plot: output pandas DataFrame formatted to correctly produce the
         plot in the figure script below
-    '''
+    """
 
     # Filter data within user-specified year range
     df_range = df[(df['Year'] > (start_year-1)) & (df['Year'] <= end_year)]
@@ -105,12 +105,12 @@ Click "Plot" to apply changes, then to go the "Export Chart"  and select
 
 
 # Import .csv files downloaded from Climate Reanalyser
-temp_qpt = pd.read_csv("QPT_temp.csv", header=8)
-precip_qpt = pd.read_csv("QPT_precip.csv", header=8)
+temp_qpt = pd.read_csv("input_data/QPT_temp.csv", header=8)
+precip_qpt = pd.read_csv("input_data/QPT_precip.csv", header=8)
 
 # Import .csv with data from the Online Isotopes in Precipitation Calculator
 # https://wateriso.utah.edu/waterisotopes/pages/data_access/oipc.html
-oipc_qpt = pd.read_csv("QPT_oipc.csv")
+oipc_qpt = pd.read_csv("input_data/QPT_oipc.csv")
 
 # Format imported data using climplot_format()
 temp_qpt_plot = climplot_format(
@@ -188,5 +188,5 @@ ax.spines['top'].set_visible(False)
 
 plt.subplots_adjust(wspace=0, hspace=0)  # removes whitespace between panels
 climatology_figure = plt.gcf()
-climatology_figure.savefig("climatetology_stack_1site.svg", dpi=300)
+climatology_figure.savefig("output_figures/climatetology_stack_1site.svg", dpi=300)
 # Can change saved figure to .png or other image file formats
